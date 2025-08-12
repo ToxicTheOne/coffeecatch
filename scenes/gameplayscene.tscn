@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://cons778vrglqa"]
+[gd_scene load_steps=9 format=3 uid="uid://cons778vrglqa"]
 
 [ext_resource type="Script" uid="uid://cvbtqc3mi6nk2" path="res://scripts/static_body_3d.gd" id="1_hj1ab"]
 [ext_resource type="PackedScene" uid="uid://u87gi2y70jjc" path="res://scenes/player.tscn" id="1_yuxya"]
 [ext_resource type="PackedScene" uid="uid://dwlqvhg0wn8t3" path="res://scenes/obstaclespawner.tscn" id="2_w8585"]
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hj1ab"]
+
 [sub_resource type="Sky" id="Sky_w8585"]
+sky_material = SubResource("PanoramaSkyMaterial_hj1ab")
 
 [sub_resource type="Environment" id="Environment_hj1ab"]
 background_mode = 2
