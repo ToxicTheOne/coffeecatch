@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://cons778vrglqa"]
+
+[ext_resource type="Script" uid="uid://cvbtqc3mi6nk2" path="res://scripts/static_body_3d.gd" id="1_hj1ab"]
+[ext_resource type="PackedScene" uid="uid://u87gi2y70jjc" path="res://scenes/player.tscn" id="1_yuxya"]
+[ext_resource type="PackedScene" uid="uid://dwlqvhg0wn8t3" path="res://scenes/obstaclespawner.tscn" id="2_w8585"]
+
+[sub_resource type="Sky" id="Sky_w8585"]
+
+[sub_resource type="Environment" id="Environment_hj1ab"]
+background_mode = 2
+sky = SubResource("Sky_w8585")
+tonemap_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_op2k8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yuxya"]
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_color = Color(0.933333, 0.882353, 0.317647, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hj1ab")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(283.34, 0, 0, 0, 0.246, 0, 0, 0, 40, 54.5692, 0, 0)
+script = ExtResource("1_hj1ab")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_op2k8")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_yuxya")
+
+[node name="Player" parent="." instance=ExtResource("1_yuxya")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.7274, 1.123, 0.740004)
+
+[node name="obstaclespawner" parent="." instance=ExtResource("2_w8585")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 194.972, 0.872364, 18.0333)
+
+[node name="obstaclespawner2" parent="." instance=ExtResource("2_w8585")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 194.972, 0.619159, 10.5806)
+
+[node name="obstaclespawner3" parent="." instance=ExtResource("2_w8585")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 194.972, 0.619159, 0.80326)
+
+[node name="obstaclespawner4" parent="." instance=ExtResource("2_w8585")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.2, 0.619159, -8.70938)
+
+[node name="obstaclespawner5" parent="." instance=ExtResource("2_w8585")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 194.972, 0.619159, -18.7626)

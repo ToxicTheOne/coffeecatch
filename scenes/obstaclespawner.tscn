@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwlqvhg0wn8t3"]
+
+[ext_resource type="Script" uid="uid://dsjkva7r4nsug" path="res://scripts/obstaclespawner.gd" id="1_lijue"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_l4ttk"]
+
+[node name="obstaclespawner" type="Node3D"]
+script = ExtResource("1_lijue")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.458997, 0, 0, 0, 0.825195, 0, 0, 0, 0.793315, 0, 0, 0)
+mesh = SubResource("BoxMesh_l4ttk")
