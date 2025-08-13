@@ -10,3 +10,7 @@ script = ExtResource("1_lijue")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.458997, 0, 0, 0, 0.825195, 0, 0, 0, 0.793315, 0, 0, 0)
 mesh = SubResource("BoxMesh_l4ttk")
+
+[node name="coffeetimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="coffeetimer" to="." method="_on_coffeetimer_timeout"]

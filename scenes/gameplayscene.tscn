@@ -1,35 +1,68 @@
-[gd_scene load_steps=9 format=3 uid="uid://cons778vrglqa"]
+[gd_scene load_steps=16 format=3 uid="uid://cons778vrglqa"]
 
 [ext_resource type="Script" uid="uid://cvbtqc3mi6nk2" path="res://scripts/static_body_3d.gd" id="1_hj1ab"]
 [ext_resource type="PackedScene" uid="uid://u87gi2y70jjc" path="res://scenes/player.tscn" id="1_yuxya"]
 [ext_resource type="PackedScene" uid="uid://dwlqvhg0wn8t3" path="res://scenes/obstaclespawner.tscn" id="2_w8585"]
+[ext_resource type="Shader" uid="uid://dl4o0kf35kgtn" path="res://shaders/retromodel.gdshader" id="3_r2c4n"]
+[ext_resource type="Texture2D" uid="uid://bfw1oxo8cgc26" path="res://Resources/Grass 2.png" id="4_r2c4n"]
+[ext_resource type="Texture2D" uid="uid://bbs27tfqkm51q" path="res://Resources/skyboxsupermario.jpg" id="5_2ejc5"]
+[ext_resource type="Shader" uid="uid://cnych07wnucrv" path="res://shaders/pixelretro.gdshader" id="7_wjviv"]
+[ext_resource type="Script" uid="uid://ds8shmksraybf" path="res://scenes/retropixeleffect.gd" id="8_4srvn"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hj1ab"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_22asa"]
+panorama = ExtResource("5_2ejc5")
 
 [sub_resource type="Sky" id="Sky_w8585"]
-sky_material = SubResource("PanoramaSkyMaterial_hj1ab")
+sky_material = SubResource("PanoramaSkyMaterial_22asa")
 
 [sub_resource type="Environment" id="Environment_hj1ab"]
 background_mode = 2
 sky = SubResource("Sky_w8585")
 tonemap_mode = 2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4srvn"]
+render_priority = 0
+shader = ExtResource("3_r2c4n")
+shader_parameter/custom_texture = ExtResource("4_r2c4n")
+shader_parameter/use_custom_texture = true
+shader_parameter/texture_offset = Vector2(0, 0)
+shader_parameter/texture_scale = Vector2(50, 5.375)
+shader_parameter/texture_rotation = 0.0
+shader_parameter/color_steps = 6.0
+shader_parameter/dither_strength = -0.07
+shader_parameter/pixel_size = 1.0
+
 [sub_resource type="BoxMesh" id="BoxMesh_op2k8"]
+material = SubResource("ShaderMaterial_4srvn")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yuxya"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wjviv"]
+shader = ExtResource("7_wjviv")
+shader_parameter/shake = 0.015
+shader_parameter/noiseQuality = 250.0
+shader_parameter/noiseIntensity = 0.001
+shader_parameter/offsetIntensity = 0.003
+shader_parameter/colorOffsetIntensity = 0.2
+shader_parameter/pixelSize = 700.0
+shader_parameter/grainIntensity = 0.01
+shader_parameter/use_overlay = false
+shader_parameter/use_lens_distortion = false
+shader_parameter/overlay_color = Color(1, 1, 1, 10)
+shader_parameter/lens_distortion_strength = 0.05
 
 [node name="Main" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-light_color = Color(0.933333, 0.882353, 0.317647, 1)
+transform = Transform3D(-0.0554007, 0.724763, -0.686767, -0.439095, 0.600056, 0.668677, 0.896731, 0.338601, 0.284996, -6.59054, 12.7903, 0.257678)
+light_volumetric_fog_energy = 2.0
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_hj1ab")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(283.34, 0, 0, 0, 0.246, 0, 0, 0, 40, 54.5692, 0, 0)
+transform = Transform3D(283.339, -0.000581392, -0.0486306, 0.67133, 0.245996, 0.197221, 0.341172, -0.00121361, 39.9995, 54.5692, 0, 0)
 script = ExtResource("1_hj1ab")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
@@ -43,16 +76,23 @@ shape = SubResource("BoxShape3D_yuxya")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.7274, 1.123, 0.740004)
 
 [node name="obstaclespawner" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 194.972, 0.872364, 18.0333)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.06, 1.31838, 18.0864)
 
 [node name="obstaclespawner2" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 194.972, 0.619159, 10.5806)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.06, 1.06518, 10.6337)
 
 [node name="obstaclespawner3" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 194.972, 0.619159, 0.80326)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.06, 1.06518, 0.856322)
 
 [node name="obstaclespawner4" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.2, 0.619159, -8.70938)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.288, 1.06518, -8.65632)
 
 [node name="obstaclespawner5" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 194.972, 0.619159, -18.7626)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.06, 1.06518, -18.7095)
+
+[node name="retropixeleffect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_wjviv")
+offset_right = 1924.0
+offset_bottom = 1092.0
+mouse_filter = 2
+script = ExtResource("8_4srvn")

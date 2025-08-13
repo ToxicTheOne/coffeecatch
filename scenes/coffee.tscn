@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://o0g6ei6s24xv"]
+
+[ext_resource type="Script" uid="uid://l5eskmg4xems" path="res://scripts/coffee.gd" id="1_eclxj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlbmd"]
+albedo_color = Color(1, 0.264747, 0.205037, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_n0kls"]
+material = SubResource("StandardMaterial3D_tlbmd")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tlbmd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fe1ek"]
+
+[node name="coffee" type="RigidBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_eclxj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_n0kls")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1.33811, 0, 0, 0, 1, 0, 0, 0, -1.36539, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_tlbmd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_fe1ek")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

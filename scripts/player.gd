@@ -1,5 +1,9 @@
 extends CharacterBody3D
 
+# Buffs
+var jump_buff := false
+var speed_buff := false
+
 # Headbob
 const BOB_FREQ := 2.0
 const BOB_AMP := 0.08
@@ -9,9 +13,9 @@ var t_bob := 0.0
 @onready var camera: Camera3D = $Twistpivot/Camera3D
 @onready var twistpivot: Node3D = $Twistpivot
 var mouse_position
-var current_speed = 8.0
+var current_speed = 10.0
 var jump_velocity = 6
-var walking_speed = 8.0
+var walking_speed = 10.0
 var crouching_speed = 3
 var mouse_sens = 0.4
 
@@ -35,16 +39,37 @@ func _unhandled_input(event):
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Autoload.player_touched.connect(apply_buff)
+
+
+func apply_buff():
+	print("apply_buff")
+	var coffee_type = Autoload.coffee_type
+	match coffee_type:
+		"jumpbuff":
+			print("jumpbuff")
+			jump_buff = true
+		"speedbuff":
+			print("speedbuff")
+			speed_buff = true
+
+	deactivate_buffs(coffee_type)
 
 
 
-
+func deactivate_buffs(coffee_type):
+	await get_tree().create_timer(5).timeout
+	match coffee_type:
+		"jumpbuff":
+			Autoload.emit_signal("end_buff")
+			print("jumpbuff")
+			jump_buff = false
+		"speedbuff":
+			Autoload.emit_signal("end_buff")
+			print("speedbuff")
+			speed_buff = false
 
 func _physics_process(delta: float) -> void:
-	
-
-
-	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -52,6 +77,8 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("move_jump") and is_on_floor():
 		velocity.y = jump_velocity
+		if jump_buff == true:
+			velocity.y = jump_velocity * 1.8
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -62,6 +89,9 @@ func _physics_process(delta: float) -> void:
 		if direction:
 			velocity.x = direction.x * current_speed
 			velocity.z = direction.z * current_speed 
+			if speed_buff == true:
+				velocity.x = direction.x * current_speed * 1.8
+				velocity.z = direction.z * current_speed * 1.8
 		else:
 			velocity.x = lerp(velocity.x, direction.x * current_speed, delta * 6)
 			velocity.z = lerp(velocity.z, direction.z * current_speed, delta * 6)
@@ -74,6 +104,12 @@ func _physics_process(delta: float) -> void:
 		var cam_direction = -twistpivot.transform.basis.z.normalized()
 		velocity = cam_direction * dash_velocity
 		velocity.y += 7
+		if speed_buff == true:
+			velocity = cam_direction * dash_velocity * 1.8
+			velocity.y += 8
+		elif jump_buff == true:
+			velocity = cam_direction * dash_velocity * 1.2
+			velocity.y += 10
 		
 		can_dash = false
 		await get_tree().create_timer(2).timeout

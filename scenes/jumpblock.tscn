@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://c01e76rm6xkbg"]
+
+[ext_resource type="Script" uid="uid://byaff3nh6ewdo" path="res://scripts/block.gd" id="1_a231x"]
+[ext_resource type="Texture2D" uid="uid://ct3c3amgtag61" path="res://Resources/Rock 3.png" id="2_rsfjt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4sh6y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ubia"]
+albedo_texture = ExtResource("2_rsfjt")
+uv1_scale = Vector3(-16.11, -1.42, 16.585)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p0bhr"]
+material = SubResource("StandardMaterial3D_1ubia")
+
+[node name="jumpblock" type="RigidBody3D"]
+script = ExtResource("1_a231x")
+normal_speed = -1.7
+small_immunity = true
+randomize_velocity = false
+metadata/_custom_type_script = "uid://byaff3nh6ewdo"
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.27873, 0, 0, 0, 2.58618, 0, 0, 0, 46.1424, 0, 0, 0)
+shape = SubResource("BoxShape3D_4sh6y")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.27873, 0, 0, 0, 2.82926, 0, 0, 0, 46.1424, 0, 0, 0)
+mesh = SubResource("BoxMesh_p0bhr")
