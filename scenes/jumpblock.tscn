@@ -13,7 +13,7 @@ uv1_scale = Vector3(-14.97, -2.095, 16.585)
 [sub_resource type="BoxMesh" id="BoxMesh_p0bhr"]
 material = SubResource("StandardMaterial3D_1ubia")
 
-[node name="jumpblock" type="RigidBody3D"]
+[node name="jumpblock" type="RigidBody3D" groups=["obstacles"]]
 script = ExtResource("1_a231x")
 normal_speed = -1.7
 small_immunity = true

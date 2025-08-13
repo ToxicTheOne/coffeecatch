@@ -14,17 +14,13 @@ var speed : float = normal_speed
 @export var randomize_velocity := true
 
 func apply_debuff():
-	print("apply_debuff")
 	var coffee_type = Autoload.coffee_type
 	match coffee_type:
 		"invincibilitybuff":
-			print("invincibility")
 			invincible_buff = true
 		"slowbuff":
-			print("slowbuff")
 			slow_buff = true
 		"smallbuff":
-			print("smallbuff")
 			small_buff = true
 	
 	deactivate_debuffs(coffee_type)
@@ -55,7 +51,7 @@ func randomize_scale():
 		collision.scale = Vector3(randf_range(2,6),randf_range(2,8),randf_range(2,9))
 	
 	elif small_buff == true:
-		collision.scale = Vector3(randf_range(1,3),randf_range(1,3),randf_range(1,3))
+		collision.scale = Vector3(2,2,2)
 	
 	mesh.scale = collision.scale
 	
@@ -68,7 +64,7 @@ func randomize_scale():
 
 func _process(delta: float):
 	if small_buff == true and small_immunity == false:
-		collision.scale = Vector3(randf_range(1,2),randf_range(1,2),randf_range(1,3))
+		collision.scale = Vector3(2,2,2)
 		mesh.scale = collision.scale
 		
 	if slow_buff == true:

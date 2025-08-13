@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cons778vrglqa"]
+[gd_scene load_steps=26 format=3 uid="uid://cons778vrglqa"]
 
 [ext_resource type="Script" uid="uid://cvbtqc3mi6nk2" path="res://scripts/static_body_3d.gd" id="1_hj1ab"]
 [ext_resource type="PackedScene" uid="uid://u87gi2y70jjc" path="res://scenes/player.tscn" id="1_yuxya"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b36g61lgdb545" path="res://Resources/pixelarttextures/Grass 2.png" id="4_r2c4n"]
 [ext_resource type="Texture2D" uid="uid://c03gifprk2ljn" path="res://Resources/pixelarttextures/skyboxsupermario.jpg" id="5_2ejc5"]
 [ext_resource type="Texture2D" uid="uid://cw24dvpf6fusm" path="res://Resources/pixelarttextures/Rock.png" id="5_brmny"]
+[ext_resource type="Script" uid="uid://0p8k3mmxqkx" path="res://scripts/killzone.gd" id="6_53431"]
 [ext_resource type="FontFile" uid="uid://c6eaablg8a0gc" path="res://Resources/font.ttf" id="7_n0c6x"]
 [ext_resource type="Shader" uid="uid://cnych07wnucrv" path="res://shaders/pixelretro.gdshader" id="7_wjviv"]
 [ext_resource type="Script" uid="uid://ds8shmksraybf" path="res://retropixeleffect.gd" id="8_4srvn"]
@@ -102,6 +103,7 @@ transform = Transform3D(485.309, -2.84217e-14, 0, 0, 105.854, 0, 0, 7.10543e-15,
 mesh = SubResource("BoxMesh_4rw3y")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/borderright"]
+transform = Transform3D(485.309, 2.37588e-07, 6.98433e-09, -1.08927e-06, 105.854, -2.17713e-11, -2.36701e-07, 1.60934e-10, 14.32, 0, 0, 3.005)
 shape = SubResource("BoxShape3D_brmny")
 
 [node name="borderleft" type="StaticBody3D" parent="StaticBody3D"]
@@ -112,9 +114,11 @@ transform = Transform3D(380.354, 5.32907e-15, 0, -1.42109e-14, 105.854, 0, 0, 6.
 mesh = SubResource("BoxMesh_4rw3y")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/borderleft"]
+transform = Transform3D(380.354, 0, 0, 0, 105.854, 0, 0, 0, 14.32, 6.292, 0, 0)
 shape = SubResource("BoxShape3D_brmny")
 
 [node name="killzone" type="Area3D" parent="StaticBody3D"]
+script = ExtResource("6_53431")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D/killzone"]
 transform = Transform3D(0.0168048, 2.27146e-10, 1.30967e-10, 2.41471e-09, 24.9054, -3.35276e-08, -1.45519e-10, 3.72529e-09, 1.02818, -0.508962, 6.81946, 0.00951864)
@@ -163,17 +167,20 @@ script = ExtResource("10_4rw3y")
 
 [node name="announcer" type="RichTextLabel" parent="scorelabel"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 963.0
-offset_right = 1920.0
-offset_bottom = 1110.0
+offset_left = -11.0
+offset_top = 21.0
+offset_right = 1899.0
+offset_bottom = 168.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(950, 100)
 mouse_filter = 2
 theme_override_constants/outline_size = 30
 theme_override_fonts/normal_font = ExtResource("7_n0c6x")
-theme_override_font_sizes/normal_font_size = 75
+theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
-text = " Announcer
+text = "
 "
+horizontal_alignment = 1
 
 [node name="scoretimer" type="Timer" parent="scorelabel"]
 autostart = true
@@ -198,4 +205,5 @@ offset_bottom = 1092.0
 mouse_filter = 2
 script = ExtResource("8_4srvn")
 
+[connection signal="body_exited" from="StaticBody3D/killzone" to="StaticBody3D/killzone" method="_on_body_exited"]
 [connection signal="timeout" from="scorelabel/scoretimer" to="scorelabel" method="_on_scoretimer_timeout"]

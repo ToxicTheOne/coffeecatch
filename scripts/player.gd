@@ -78,6 +78,7 @@ func deactivate_buffs(coffee_type):
 		"speedbuff":
 			Autoload.emit_signal("end_buff")
 			speed_buff = false
+	Autoload.stats_increased = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

@@ -13,7 +13,7 @@ uv1_scale = Vector3(7.45, 7.45, 7.45)
 [sub_resource type="BoxMesh" id="BoxMesh_cvgtc"]
 material = SubResource("StandardMaterial3D_cgrg5")
 
-[node name="sectionblock" type="RigidBody3D"]
+[node name="sectionblock" type="RigidBody3D" groups=["obstacles"]]
 script = ExtResource("1_dskgo")
 normal_speed = -1.0
 small_immunity = true
