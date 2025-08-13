@@ -52,14 +52,17 @@ func _ready():
 
 
 func apply_buff():
-	print("apply_buff")
+	var random_chance = randi_range(0,1)
+	if random_chance == 1:
+		current_speed += 1
+		walking_speed += 1
+		jump_velocity += 1
+		Autoload.stats_increased = true
 	var coffee_type = Autoload.coffee_type
 	match coffee_type:
 		"jumpbuff":
-			print("jumpbuff")
 			jump_buff = true
 		"speedbuff":
-			print("speedbuff")
 			speed_buff = true
 
 	deactivate_buffs(coffee_type)
@@ -71,11 +74,9 @@ func deactivate_buffs(coffee_type):
 	match coffee_type:
 		"jumpbuff":
 			Autoload.emit_signal("end_buff")
-			print("jumpbuff")
 			jump_buff = false
 		"speedbuff":
 			Autoload.emit_signal("end_buff")
-			print("speedbuff")
 			speed_buff = false
 
 func _physics_process(delta: float) -> void:
@@ -110,8 +111,6 @@ func _physics_process(delta: float) -> void:
 		
 
 	if Input.is_action_just_pressed("dash") and can_dash:
-		self.collision_mask = 2
-		self.collision_layer = 2
 		var cam_direction = -twistpivot.transform.basis.z.normalized()
 		velocity = cam_direction * dash_velocity
 		velocity.y += 4
@@ -122,8 +121,6 @@ func _physics_process(delta: float) -> void:
 			velocity = cam_direction * dash_velocity * 1.2
 			velocity.y += 8
 		
-		self.collision_mask = 1
-		self.collision_layer = 1
 		dashes -= 1
 		
 		await get_tree().create_timer(3).timeout

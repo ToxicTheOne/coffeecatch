@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://c01e76rm6xkbg"]
 
 [ext_resource type="Script" uid="uid://byaff3nh6ewdo" path="res://scripts/block.gd" id="1_a231x"]
-[ext_resource type="Texture2D" uid="uid://ct3c3amgtag61" path="res://Resources/PixelArt3D/Rock 3.png" id="2_rsfjt"]
+[ext_resource type="Texture2D" uid="uid://fk1pn37ieink" path="res://Resources/pixelarttextures/Rock 3.png" id="2_rsfjt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4sh6y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ubia"]
-albedo_color = Color(0.644663, 0.644663, 0.644663, 1)
+albedo_color = Color(0.783523, 0.783523, 0.783523, 1)
 albedo_texture = ExtResource("2_rsfjt")
-uv1_scale = Vector3(-16.11, -1.42, 16.585)
+uv1_scale = Vector3(-14.97, -2.095, 16.585)
 
 [sub_resource type="BoxMesh" id="BoxMesh_p0bhr"]
 material = SubResource("StandardMaterial3D_1ubia")
@@ -21,19 +21,19 @@ randomize_velocity = false
 metadata/_custom_type_script = "uid://byaff3nh6ewdo"
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -0.221249, 0.0627532, -16.903)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 3.66113, 0.0627532, -16.903)
 shape = SubResource("BoxShape3D_4sh6y")
 
 [node name="Collision2" type="CollisionShape3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -0.221249, 0.0627532, -10.8915)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 3.66113, 0.0627532, -10.8915)
 shape = SubResource("BoxShape3D_4sh6y")
 
 [node name="Collision3" type="CollisionShape3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -0.221249, 0.0627532, -4.91426)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 3.66113, 0.0627532, -4.91426)
 shape = SubResource("BoxShape3D_4sh6y")
 
 [node name="Collision4" type="CollisionShape3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -0.221249, 0.0627532, 1.07421)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 3.66113, 0.0627532, 1.07421)
 shape = SubResource("BoxShape3D_4sh6y")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]

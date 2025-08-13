@@ -25,14 +25,14 @@ func _process(delta: float) -> void:
 		if chance_spawn2 == 1:
 			spawn_obstacle3()
 	
-	position.x += 0.19
+	position.x += 0.18
 
 func spawn_coffee():
 	var new_coffee = coffee_object.instantiate()
 	add_child(new_coffee)
 	new_coffee.initialize_coffee()
 	
-	timer.wait_time = randi_range(1,10)
+	timer.wait_time = randi_range(1,5)
 	timer.start()
 
 
@@ -51,7 +51,7 @@ func spawn_obstacle2():
 	var new_obstacle2 = obstacle2.instantiate()
 	add_child(new_obstacle2)
 
-	new_obstacle2.position.y += 1
+	new_obstacle2.position.y += 10
 	await get_tree().create_timer(randf_range(1,3)).timeout
 	can_spawn_obstacles = true
 

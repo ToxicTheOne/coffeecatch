@@ -1,15 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://cons778vrglqa"]
+[gd_scene load_steps=25 format=3 uid="uid://cons778vrglqa"]
 
 [ext_resource type="Script" uid="uid://cvbtqc3mi6nk2" path="res://scripts/static_body_3d.gd" id="1_hj1ab"]
 [ext_resource type="PackedScene" uid="uid://u87gi2y70jjc" path="res://scenes/player.tscn" id="1_yuxya"]
 [ext_resource type="PackedScene" uid="uid://dwlqvhg0wn8t3" path="res://scenes/obstaclespawner.tscn" id="2_w8585"]
 [ext_resource type="Shader" uid="uid://dl4o0kf35kgtn" path="res://shaders/retromodel.gdshader" id="3_r2c4n"]
-[ext_resource type="Texture2D" uid="uid://bfw1oxo8cgc26" path="res://Resources/PixelArt3D/Grass 2.png" id="4_r2c4n"]
-[ext_resource type="Texture2D" uid="uid://bbs27tfqkm51q" path="res://Resources/PixelArt3D/skyboxsupermario.jpg" id="5_2ejc5"]
+[ext_resource type="Texture2D" uid="uid://b36g61lgdb545" path="res://Resources/pixelarttextures/Grass 2.png" id="4_r2c4n"]
+[ext_resource type="Texture2D" uid="uid://c03gifprk2ljn" path="res://Resources/pixelarttextures/skyboxsupermario.jpg" id="5_2ejc5"]
+[ext_resource type="Texture2D" uid="uid://cw24dvpf6fusm" path="res://Resources/pixelarttextures/Rock.png" id="5_brmny"]
 [ext_resource type="FontFile" uid="uid://c6eaablg8a0gc" path="res://Resources/font.ttf" id="7_n0c6x"]
 [ext_resource type="Shader" uid="uid://cnych07wnucrv" path="res://shaders/pixelretro.gdshader" id="7_wjviv"]
 [ext_resource type="Script" uid="uid://ds8shmksraybf" path="res://retropixeleffect.gd" id="8_4srvn"]
-[ext_resource type="Script" uid="uid://d3660jnio0pgm" path="res://scripts/scorelabel.gd" id="10_4rw3y"]
+[ext_resource type="Script" uid="uid://d3660jnio0pgm" path="res://scripts/labelmanager.gd" id="10_4rw3y"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_22asa"]
 panorama = ExtResource("5_2ejc5")
@@ -39,6 +40,24 @@ material = SubResource("ShaderMaterial_4srvn")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yuxya"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_53431"]
+albedo_color = Color(0.789172, 0.789172, 0.789172, 1)
+albedo_texture = ExtResource("5_brmny")
+uv1_scale = Vector3(-32.06, 9.71, -2.155)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4rw3y"]
+material = SubResource("StandardMaterial3D_53431")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_brmny"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjn31"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e2elo"]
+material = SubResource("StandardMaterial3D_vjn31")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_53431"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wjviv"]
 shader = ExtResource("7_wjviv")
 shader_parameter/shake = 0.015
@@ -56,7 +75,8 @@ shader_parameter/lens_distortion_strength = 0.05
 [node name="Main" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.0554007, 0.724763, -0.686767, -0.439095, 0.600056, 0.668677, 0.896731, 0.338601, 0.284996, -6.59054, 12.7903, 0.257678)
+transform = Transform3D(0.65602, 0.316856, -0.685011, 0.729154, -0.0317386, 0.683614, 0.194866, -0.947942, -0.251858, -6.59054, 159.09, 0.257678)
+light_energy = 0.8
 light_volumetric_fog_energy = 2.0
 shadow_enabled = true
 
@@ -64,9 +84,7 @@ shadow_enabled = true
 environment = SubResource("Environment_hj1ab")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(390.7, -0.0104761, -0.0496303, 0.925707, 4.43259, 0.201275, 0.470447, -0.021868, 40.8218, 54.5692, -2.05438, 0)
-collision_layer = 3
-collision_mask = 3
+transform = Transform3D(995.575, -0.0104378, -0.0495369, 2.35887, 4.41637, 0.200896, 1.19879, -0.021788, 40.745, 259.336, -2.05438, 0)
 script = ExtResource("1_hj1ab")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
@@ -75,6 +93,43 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_yuxya")
+
+[node name="borderright" type="StaticBody3D" parent="StaticBody3D"]
+transform = Transform3D(0.00206486, 6.06438e-06, 3.08187e-06, -0.000430137, 0.225595, -0.00111296, -2.40268e-05, 0.00012078, 0.0244961, -0.00263968, 7.19144, 0.596944)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/borderright"]
+transform = Transform3D(485.309, -2.84217e-14, 0, 0, 105.854, 0, 0, 7.10543e-15, 14.3196, 0, 0, 3.00527)
+mesh = SubResource("BoxMesh_4rw3y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/borderright"]
+shape = SubResource("BoxShape3D_brmny")
+
+[node name="borderleft" type="StaticBody3D" parent="StaticBody3D"]
+transform = Transform3D(0.00263464, 6.06437e-06, 3.08187e-06, -0.00054883, 0.225595, -0.00111296, -3.06567e-05, 0.00012078, 0.0244961, -0.019379, 7.25356, -0.694179)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/borderleft"]
+transform = Transform3D(380.354, 5.32907e-15, 0, -1.42109e-14, 105.854, 0, 0, 6.20385e-25, 14.3196, 6.2919, 0, 0)
+mesh = SubResource("BoxMesh_4rw3y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/borderleft"]
+shape = SubResource("BoxShape3D_brmny")
+
+[node name="killzone" type="Area3D" parent="StaticBody3D"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D/killzone"]
+transform = Transform3D(0.0168048, 2.27146e-10, 1.30967e-10, 2.41471e-09, 24.9054, -3.35276e-08, -1.45519e-10, 3.72529e-09, 1.02818, -0.508962, 6.81946, 0.00951864)
+mesh = SubResource("BoxMesh_e2elo")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/killzone"]
+transform = Transform3D(0.0876723, 6.53245e-10, 1.30967e-10, 1.36788e-08, 46.4653, -3.72529e-09, -8.14907e-10, 2.23517e-08, 1.04091, -0.544708, -4.13418, 0.00406278)
+shape = SubResource("BoxShape3D_53431")
+debug_color = Color(0.960784, 0, 0, 0.419608)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D/killzone"]
+transform = Transform3D(1.74011, 1.0877e-10, 3.63798e-10, 4.59724e-07, 4.81949, -7.45058e-09, -3.91155e-08, 2.79397e-09, 1.93318, 0.327899, -9.9107, -0.00908794)
+shape = SubResource("BoxShape3D_53431")
+debug_color = Color(0.960784, 0, 0, 0.419608)
 
 [node name="Player" parent="." instance=ExtResource("1_yuxya")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -136.897, 1.123, 0.740004)
@@ -96,8 +151,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.06, 1.06518, -18.7095)
 
 [node name="scorelabel" type="RichTextLabel" parent="."]
 offset_left = -4.0
-offset_right = 623.0
-offset_bottom = 483.0
+offset_right = 1946.0
+offset_bottom = 1161.0
 mouse_filter = 2
 theme_override_constants/outline_size = 30
 theme_override_fonts/normal_font = ExtResource("7_n0c6x")
@@ -106,10 +161,25 @@ text = " Score
 "
 script = ExtResource("10_4rw3y")
 
+[node name="announcer" type="RichTextLabel" parent="scorelabel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 963.0
+offset_right = 1920.0
+offset_bottom = 1110.0
+mouse_filter = 2
+theme_override_constants/outline_size = 30
+theme_override_fonts/normal_font = ExtResource("7_n0c6x")
+theme_override_font_sizes/normal_font_size = 75
+bbcode_enabled = true
+text = " Announcer
+"
+
 [node name="scoretimer" type="Timer" parent="scorelabel"]
 autostart = true
 
 [node name="timelabel" type="RichTextLabel" parent="scorelabel"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 83.0
 offset_right = 483.0
@@ -119,19 +189,6 @@ theme_override_constants/outline_size = 25
 theme_override_fonts/normal_font = ExtResource("7_n0c6x")
 theme_override_font_sizes/normal_font_size = 60
 text = " Time
-"
-
-[node name="announcer" type="RichTextLabel" parent="."]
-offset_left = 779.0
-offset_top = 14.0
-offset_right = 1374.0
-offset_bottom = 161.0
-mouse_filter = 2
-theme_override_constants/outline_size = 30
-theme_override_fonts/normal_font = ExtResource("7_n0c6x")
-theme_override_font_sizes/normal_font_size = 71
-bbcode_enabled = true
-text = " Announcer
 "
 
 [node name="retropixeleffect" type="ColorRect" parent="."]

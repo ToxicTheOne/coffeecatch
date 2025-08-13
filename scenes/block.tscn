@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://kum2yem6oml8"]
 
 [ext_resource type="Script" uid="uid://byaff3nh6ewdo" path="res://scripts/block.gd" id="1_8r6n6"]
-[ext_resource type="Texture2D" uid="uid://0bdngujtab1a" path="res://Resources/PixelArt3D/Rock 2.png" id="2_cgrg5"]
+[ext_resource type="Texture2D" uid="uid://cruv3yoo1kapa" path="res://Resources/pixelarttextures/Rock 2.png" id="2_cgrg5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3gtdk"]
 
@@ -16,7 +16,7 @@ material = SubResource("StandardMaterial3D_cgrg5")
 script = ExtResource("1_8r6n6")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.78524, 0, 0, 0, 5.76696, 0, 0, 0, 4.45892, 0, 0, 0)
+transform = Transform3D(1.78524, 0, 0, 0, 5.76696, 0, 0, 0, 4.45892, -0.141665, 0, 0)
 shape = SubResource("BoxShape3D_3gtdk")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]

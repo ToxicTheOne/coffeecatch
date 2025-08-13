@@ -33,7 +33,7 @@ func apply_debuff():
 
 
 func deactivate_debuffs(coffee_type):
-	await get_tree().create_timer(6).timeout
+	await get_tree().create_timer(5).timeout
 	match coffee_type:
 		"invincibilitybuff":
 			Autoload.emit_signal("end_buff")
@@ -44,7 +44,7 @@ func deactivate_debuffs(coffee_type):
 		"smallbuff":
 			Autoload.emit_signal("end_buff")
 			small_buff = false
-
+	Autoload.emit_signal("end_buff")
 
 
 func randomize_scale():
@@ -55,12 +55,12 @@ func randomize_scale():
 		collision.scale = Vector3(randf_range(2,6),randf_range(2,8),randf_range(2,9))
 	
 	elif small_buff == true:
-		collision.scale = Vector3(randf_range(1,2),randf_range(1,2),randf_range(1,3))
+		collision.scale = Vector3(randf_range(1,3),randf_range(1,3),randf_range(1,3))
 	
 	mesh.scale = collision.scale
 	
 	if randomize_velocity == true:
-		normal_speed = randf_range(-1.2, -1.9)
+		normal_speed = randf_range(-1.1, -1.8)
 		speed = normal_speed
 	
 	await get_tree().create_timer(0.2).timeout
@@ -80,7 +80,7 @@ func _process(delta: float):
 		position.x += speed
 	elif invincible_buff == true:
 		position.x += 0
-		position.y -= 0.3
+		position.y -= 0.2
 
 
 
