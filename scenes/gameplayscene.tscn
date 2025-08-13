@@ -1,13 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://cons778vrglqa"]
+[gd_scene load_steps=18 format=3 uid="uid://cons778vrglqa"]
 
 [ext_resource type="Script" uid="uid://cvbtqc3mi6nk2" path="res://scripts/static_body_3d.gd" id="1_hj1ab"]
 [ext_resource type="PackedScene" uid="uid://u87gi2y70jjc" path="res://scenes/player.tscn" id="1_yuxya"]
 [ext_resource type="PackedScene" uid="uid://dwlqvhg0wn8t3" path="res://scenes/obstaclespawner.tscn" id="2_w8585"]
 [ext_resource type="Shader" uid="uid://dl4o0kf35kgtn" path="res://shaders/retromodel.gdshader" id="3_r2c4n"]
-[ext_resource type="Texture2D" uid="uid://bfw1oxo8cgc26" path="res://Resources/Grass 2.png" id="4_r2c4n"]
-[ext_resource type="Texture2D" uid="uid://bbs27tfqkm51q" path="res://Resources/skyboxsupermario.jpg" id="5_2ejc5"]
+[ext_resource type="Texture2D" uid="uid://bfw1oxo8cgc26" path="res://Resources/PixelArt3D/Grass 2.png" id="4_r2c4n"]
+[ext_resource type="Texture2D" uid="uid://bbs27tfqkm51q" path="res://Resources/PixelArt3D/skyboxsupermario.jpg" id="5_2ejc5"]
+[ext_resource type="FontFile" uid="uid://c6eaablg8a0gc" path="res://Resources/font.ttf" id="7_n0c6x"]
 [ext_resource type="Shader" uid="uid://cnych07wnucrv" path="res://shaders/pixelretro.gdshader" id="7_wjviv"]
-[ext_resource type="Script" uid="uid://ds8shmksraybf" path="res://scenes/retropixeleffect.gd" id="8_4srvn"]
+[ext_resource type="Script" uid="uid://ds8shmksraybf" path="res://retropixeleffect.gd" id="8_4srvn"]
+[ext_resource type="Script" uid="uid://d3660jnio0pgm" path="res://scripts/scorelabel.gd" id="10_4rw3y"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_22asa"]
 panorama = ExtResource("5_2ejc5")
@@ -62,7 +64,9 @@ shadow_enabled = true
 environment = SubResource("Environment_hj1ab")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(283.339, -0.000581392, -0.0486306, 0.67133, 0.245996, 0.197221, 0.341172, -0.00121361, 39.9995, 54.5692, 0, 0)
+transform = Transform3D(390.7, -0.0104761, -0.0496303, 0.925707, 4.43259, 0.201275, 0.470447, -0.021868, 40.8218, 54.5692, -2.05438, 0)
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_hj1ab")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
@@ -73,7 +77,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_yuxya")
 
 [node name="Player" parent="." instance=ExtResource("1_yuxya")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.7274, 1.123, 0.740004)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -136.897, 1.123, 0.740004)
 
 [node name="obstaclespawner" parent="." instance=ExtResource("2_w8585")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.06, 1.31838, 18.0864)
@@ -90,9 +94,51 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.288, 1.06518, -8.65632)
 [node name="obstaclespawner5" parent="." instance=ExtResource("2_w8585")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.06, 1.06518, -18.7095)
 
+[node name="scorelabel" type="RichTextLabel" parent="."]
+offset_left = -4.0
+offset_right = 623.0
+offset_bottom = 483.0
+mouse_filter = 2
+theme_override_constants/outline_size = 30
+theme_override_fonts/normal_font = ExtResource("7_n0c6x")
+theme_override_font_sizes/normal_font_size = 71
+text = " Score
+"
+script = ExtResource("10_4rw3y")
+
+[node name="scoretimer" type="Timer" parent="scorelabel"]
+autostart = true
+
+[node name="timelabel" type="RichTextLabel" parent="scorelabel"]
+offset_left = 1.0
+offset_top = 83.0
+offset_right = 483.0
+offset_bottom = 179.0
+mouse_filter = 2
+theme_override_constants/outline_size = 25
+theme_override_fonts/normal_font = ExtResource("7_n0c6x")
+theme_override_font_sizes/normal_font_size = 60
+text = " Time
+"
+
+[node name="announcer" type="RichTextLabel" parent="."]
+offset_left = 779.0
+offset_top = 14.0
+offset_right = 1374.0
+offset_bottom = 161.0
+mouse_filter = 2
+theme_override_constants/outline_size = 30
+theme_override_fonts/normal_font = ExtResource("7_n0c6x")
+theme_override_font_sizes/normal_font_size = 71
+bbcode_enabled = true
+text = " Announcer
+"
+
 [node name="retropixeleffect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_wjviv")
 offset_right = 1924.0
 offset_bottom = 1092.0
 mouse_filter = 2
 script = ExtResource("8_4srvn")
+
+[connection signal="timeout" from="scorelabel/scoretimer" to="scorelabel" method="_on_scoretimer_timeout"]

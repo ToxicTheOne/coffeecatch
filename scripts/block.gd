@@ -80,7 +80,7 @@ func _process(delta: float):
 		position.x += speed
 	elif invincible_buff == true:
 		position.x += 0
-		position.z += randf_range(0,2)
+		position.y -= 0.3
 
 
 

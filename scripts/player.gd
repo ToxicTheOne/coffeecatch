@@ -26,7 +26,7 @@ const FOV_CHANGE = 1.5
 # Dash
 var dash_velocity = 37
 var can_dash := true
-
+var dashes := 3
 # Camera
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -35,6 +35,15 @@ func _unhandled_input(event):
 		camera.rotation.x = clamp(camera.rotation.x,  deg_to_rad(-40), deg_to_rad(60))
 
 
+func _process(delta):
+	if dashes == 0:
+		can_dash = false
+	elif dashes > 0:
+		can_dash = true
+	if dashes > 3:
+		dashes = 3
+	elif dashes < 0:
+		dashes = 0
 
 
 func _ready():
@@ -101,19 +110,24 @@ func _physics_process(delta: float) -> void:
 		
 
 	if Input.is_action_just_pressed("dash") and can_dash:
+		self.collision_mask = 2
+		self.collision_layer = 2
 		var cam_direction = -twistpivot.transform.basis.z.normalized()
 		velocity = cam_direction * dash_velocity
-		velocity.y += 7
+		velocity.y += 4
 		if speed_buff == true:
 			velocity = cam_direction * dash_velocity * 1.8
-			velocity.y += 8
+			velocity.y += 5
 		elif jump_buff == true:
 			velocity = cam_direction * dash_velocity * 1.2
-			velocity.y += 10
+			velocity.y += 8
 		
-		can_dash = false
-		await get_tree().create_timer(2).timeout
-		can_dash = true
+		self.collision_mask = 1
+		self.collision_layer = 1
+		dashes -= 1
+		
+		await get_tree().create_timer(3).timeout
+		dashes += 1
 	
 	
 	t_bob += delta * velocity.length() * float(is_on_floor())

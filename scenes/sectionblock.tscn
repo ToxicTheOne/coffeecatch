@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bdulp435xon0i"]
 
-[ext_resource type="Texture2D" uid="uid://pgx2ndluvq0r" path="res://Resources/Stone bricks.png" id="1_0m0is"]
+[ext_resource type="Texture2D" uid="uid://pgx2ndluvq0r" path="res://Resources/PixelArt3D/Stone bricks.png" id="1_0m0is"]
 [ext_resource type="Script" uid="uid://dw0nxriyqbsxn" path="res://scripts/sectionblock.gd" id="1_dskgo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dskgo"]
@@ -20,9 +20,13 @@ small_immunity = true
 randomize_velocity = false
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(5.79466, 0, 0, 0, 43.795, 0, 0, 0, 22.2187, 0, 0, 0)
+transform = Transform3D(13, 0, 0, 0, 13, 0, 0, 0, 13, -4.06436, -6.19992, 0)
+shape = SubResource("BoxShape3D_dskgo")
+
+[node name="Collision2" type="CollisionShape3D" parent="."]
+transform = Transform3D(13.1338, 0, 0, 0, 13.1338, 0, 0, 0, 13.1338, -4.06436, 8.74606, 0)
 shape = SubResource("BoxShape3D_dskgo")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(5.79466, 0, 0, 0, 32.3732, 0, 0, 0, 17.2196, 0, 0, 0)
+transform = Transform3D(5.79466, 0, 0, 0, 32.3732, 0, 0, 0, 12.5581, 0, 0, 0)
 mesh = SubResource("BoxMesh_cvgtc")
