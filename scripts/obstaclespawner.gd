@@ -5,7 +5,7 @@ extends Node3D
 @onready var obstacle2 = preload("res://scenes/sectionblock.tscn")
 @onready var obstacle3 = preload("res://scenes/jumpblock.tscn")
 @onready var timer = $coffeetimer
-
+@onready var speed : int = 0.07
 var can_spawn_obstacles = true
 
 
@@ -13,6 +13,14 @@ var can_spawn_obstacles = true
 func _ready() -> void:
 	timer.wait_time = randi_range(1,10)
 	timer.start()
+	await get_tree().create_timer(10).timeout
+	speed = 0.1
+	await get_tree().create_timer(20).timeout
+	speed = 0.2
+	await get_tree().create_timer(10).timeout
+	speed = 0.26
+	await get_tree().create_timer(30).timeout
+	speed = 0.3
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -25,7 +33,7 @@ func _process(delta: float) -> void:
 		if chance_spawn2 == 1:
 			spawn_obstacle3()
 	
-	position.x += 0.18
+	position.x += speed
 
 func spawn_coffee():
 	var new_coffee = coffee_object.instantiate()

@@ -13,6 +13,7 @@ func _ready():
 
 func _process(delta):
 	update_label()
+	Autoload.time_passed = secondslabel.text
 
 
 func update_label():
@@ -57,15 +58,19 @@ func update_announcer():
 			main_phrase = str("Coffee Aquired! 'Small' buff! \n", stats_increase_phrase)
 		null:
 			print("coffee_type not found, couldnt update label. this print is in the Label script")
+	
+	var tween = get_tree().create_tween()
+	
+	tween.tween_property(announcer, "scale", Vector2(0, 0), 0.05 ).set_trans(Tween.TRANS_LINEAR)
 	announcer.text = main_phrase
 
-	var tween = get_tree().create_tween()
-	tween.tween_property(announcer, "scale", Vector2(1, 1), 0.7 ).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	
+	tween.tween_property(announcer, "scale", Vector2(1, 1), 0.6 ).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	
 	await get_tree().create_timer(3).timeout
 
 	tween = get_tree().create_tween()
-	tween.tween_property(announcer, "scale", Vector2(0, 0), 0.5 ).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(announcer, "scale", Vector2(0, 0), 0.3 ).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
 	
 	await get_tree().create_timer(0.6).timeout
 	announcer.text = ""

@@ -13,29 +13,21 @@ uv1_scale = Vector3(-14.97, -2.095, 16.585)
 [sub_resource type="BoxMesh" id="BoxMesh_p0bhr"]
 material = SubResource("StandardMaterial3D_1ubia")
 
-[node name="jumpblock" type="RigidBody3D" groups=["obstacles"]]
+[node name="jumpblock" type="StaticBody3D" groups=["obstacles"]]
 script = ExtResource("1_a231x")
-normal_speed = -1.7
+normal_speed = -1.4
 small_immunity = true
 randomize_velocity = false
 metadata/_custom_type_script = "uid://byaff3nh6ewdo"
 
-[node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 3.66113, 0.0627532, -16.903)
-shape = SubResource("BoxShape3D_4sh6y")
-
-[node name="Collision2" type="CollisionShape3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 3.66113, 0.0627532, -10.8915)
-shape = SubResource("BoxShape3D_4sh6y")
-
 [node name="Collision3" type="CollisionShape3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 3.66113, 0.0627532, -4.91426)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 6.07863, -0.17531, -11.8023)
 shape = SubResource("BoxShape3D_4sh6y")
 
 [node name="Collision4" type="CollisionShape3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 3.66113, 0.0627532, 1.07421)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 6.07863, -0.17531, -1.60336)
 shape = SubResource("BoxShape3D_4sh6y")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.27873, 0, 0, 0, 7.0938, 0, 0, 0, 23.7057, 2.13811, -0.53905, -7.97013)
+transform = Transform3D(2.34222, 0, 0, 0, 8.84267, 0, 0, 0, 20.9615, 2.64308, 0.431276, -6.87484)
 mesh = SubResource("BoxMesh_p0bhr")

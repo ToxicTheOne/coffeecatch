@@ -1,5 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://cons778vrglqa"]
+[gd_scene load_steps=28 format=3 uid="uid://cons778vrglqa"]
 
+[ext_resource type="Script" uid="uid://c742y6k548eej" path="res://scripts/gameplayscene.gd" id="1_e2elo"]
 [ext_resource type="Script" uid="uid://cvbtqc3mi6nk2" path="res://scripts/static_body_3d.gd" id="1_hj1ab"]
 [ext_resource type="PackedScene" uid="uid://u87gi2y70jjc" path="res://scenes/player.tscn" id="1_yuxya"]
 [ext_resource type="PackedScene" uid="uid://dwlqvhg0wn8t3" path="res://scenes/obstaclespawner.tscn" id="2_w8585"]
@@ -12,6 +13,7 @@
 [ext_resource type="Shader" uid="uid://cnych07wnucrv" path="res://shaders/pixelretro.gdshader" id="7_wjviv"]
 [ext_resource type="Script" uid="uid://ds8shmksraybf" path="res://retropixeleffect.gd" id="8_4srvn"]
 [ext_resource type="Script" uid="uid://d3660jnio0pgm" path="res://scripts/labelmanager.gd" id="10_4rw3y"]
+[ext_resource type="PackedScene" uid="uid://rw7gdui8lu3n" path="res://addons/EasyMenus/Scenes/pause_menu.tscn" id="14_8l8kk"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_22asa"]
 panorama = ExtResource("5_2ejc5")
@@ -74,6 +76,7 @@ shader_parameter/overlay_color = Color(1, 1, 1, 10)
 shader_parameter/lens_distortion_strength = 0.05
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_e2elo")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.65602, 0.316856, -0.685011, 0.729154, -0.0317386, 0.683614, 0.194866, -0.947942, -0.251858, -6.59054, 159.09, 0.257678)
@@ -139,19 +142,19 @@ debug_color = Color(0.960784, 0, 0, 0.419608)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -136.897, 1.123, 0.740004)
 
 [node name="obstaclespawner" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.06, 1.31838, 18.0864)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 747.528, 1.31838, 18.0864)
 
 [node name="obstaclespawner2" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.06, 1.06518, 10.6337)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 747.528, 1.06518, 10.6337)
 
 [node name="obstaclespawner3" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.06, 1.06518, 0.856322)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 747.528, 1.06518, 0.856322)
 
 [node name="obstaclespawner4" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.288, 1.06518, -8.65632)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 747.756, 1.06518, -8.65632)
 
 [node name="obstaclespawner5" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 195.06, 1.06518, -18.7095)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 747.528, 1.06518, -18.7095)
 
 [node name="scorelabel" type="RichTextLabel" parent="."]
 offset_left = -4.0
@@ -205,5 +208,8 @@ offset_bottom = 1092.0
 mouse_filter = 2
 script = ExtResource("8_4srvn")
 
+[node name="PauseMenu" parent="." instance=ExtResource("14_8l8kk")]
+
+[connection signal="body_entered" from="StaticBody3D/killzone" to="StaticBody3D/killzone" method="_on_body_entered"]
 [connection signal="body_exited" from="StaticBody3D/killzone" to="StaticBody3D/killzone" method="_on_body_exited"]
 [connection signal="timeout" from="scorelabel/scoretimer" to="scorelabel" method="_on_scoretimer_timeout"]

@@ -12,7 +12,7 @@ uv1_scale = Vector3(4.63, 4.63, 4.63)
 [sub_resource type="BoxMesh" id="BoxMesh_8r6n6"]
 material = SubResource("StandardMaterial3D_cgrg5")
 
-[node name="block" type="RigidBody3D" groups=["obstacles"]]
+[node name="block" type="StaticBody3D" groups=["obstacles"]]
 script = ExtResource("1_8r6n6")
 
 [node name="Collision" type="CollisionShape3D" parent="."]

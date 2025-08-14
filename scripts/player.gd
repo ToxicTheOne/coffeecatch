@@ -24,9 +24,16 @@ const BASE_FOV = 75.0
 const FOV_CHANGE = 1.5
 
 # Dash
-var dash_velocity = 37
+var dash_velocity = 40
 var can_dash := true
 var dashes := 3
+@onready var dashbar1 := $dashbar1
+@onready var dashbar2 := $dashbar2
+@onready var dashbar3 := $dashbar3
+
+# Slam
+@onready var slam_velocity = jump_velocity * 2.5
+
 # Camera
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -44,10 +51,13 @@ func _process(delta):
 		dashes = 3
 	elif dashes < 0:
 		dashes = 0
+	Autoload.player_velocity = velocity
+	handle_dash_rects()
+
+
 
 
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Autoload.player_touched.connect(apply_buff)
 
 
@@ -126,6 +136,14 @@ func _physics_process(delta: float) -> void:
 		
 		await get_tree().create_timer(3).timeout
 		dashes += 1
+		
+		
+		
+		
+	if Input.is_action_just_pressed("slam"):
+		velocity.y -= slam_velocity
+	
+	
 	
 	
 	t_bob += delta * velocity.length() * float(is_on_floor())
@@ -145,3 +163,24 @@ func headbob(t_bob):
 	pos.y = sin(t_bob * BOB_FREQ) * BOB_AMP
 	pos.x = sin(t_bob * BOB_FREQ) / 2 * BOB_AMP
 	return pos
+
+func handle_dash_rects():
+	var tween = get_tree().create_tween()
+	
+	match dashes:
+		0:
+			tween.tween_property(dashbar1, "color", Color(0,0,0), 0.07).set_trans(Tween.TRANS_CUBIC)
+			tween.tween_property(dashbar2, "color", Color(0,0,0), 0.07).set_trans(Tween.TRANS_CUBIC)
+			tween.tween_property(dashbar3, "color", Color(0,0,0), 0.07).set_trans(Tween.TRANS_CUBIC)
+		1:
+			tween.tween_property(dashbar1, "color", Color(0,0,0), 0.07).set_trans(Tween.TRANS_CUBIC)
+			tween.tween_property(dashbar2, "color", Color(0,0,0), 0.07).set_trans(Tween.TRANS_CUBIC)
+			tween.tween_property(dashbar3, "color", Color(1,1,1), 0.07).set_trans(Tween.TRANS_CUBIC)
+		2:
+			tween.tween_property(dashbar1, "color", Color(0,0,0), 0.07).set_trans(Tween.TRANS_CUBIC)
+			tween.tween_property(dashbar2, "color", Color(1,1,1), 0.07).set_trans(Tween.TRANS_CUBIC)
+			tween.tween_property(dashbar3, "color", Color(1,1,1), 0.07).set_trans(Tween.TRANS_CUBIC)
+		3:
+			tween.tween_property(dashbar1, "color", Color(1,1,1), 0.07).set_trans(Tween.TRANS_CUBIC)
+			tween.tween_property(dashbar2, "color", Color(1,1,1), 0.07).set_trans(Tween.TRANS_CUBIC)
+			tween.tween_property(dashbar3, "color", Color(1,1,1), 0.07).set_trans(Tween.TRANS_CUBIC)

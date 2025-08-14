@@ -3,6 +3,9 @@ extends StaticBody3D
 
 var speed = 0.01
 var speed_gain_chance
+@onready var left_border = $borderleft
+@onready var right_border = $borderright
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

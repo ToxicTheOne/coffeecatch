@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://o0g6ei6s24xv"]
+[gd_scene load_steps=9 format=3 uid="uid://o0g6ei6s24xv"]
 
 [ext_resource type="Script" uid="uid://l5eskmg4xems" path="res://scripts/coffee.gd" id="1_eclxj"]
 [ext_resource type="PackedScene" uid="uid://bpku2vqvl0d82" path="res://Resources/White Mug.fbx" id="2_fe1ek"]
+[ext_resource type="PackedScene" uid="uid://dnceuc1h5dkj5" path="res://Resources/Green Mug.fbx" id="3_5yp7a"]
+[ext_resource type="PackedScene" uid="uid://bbw8c41ekqj32" path="res://Resources/Purple Mug.fbx" id="4_46xm4"]
+[ext_resource type="PackedScene" uid="uid://d0thmad6eo3eg" path="res://Resources/Red Mug.fbx" id="5_op6nc"]
+[ext_resource type="PackedScene" uid="uid://b8pkbqhuu7kjj" path="res://Resources/Blue Mug.fbx" id="6_8xhtm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tlbmd"]
+size = Vector3(1, 1, 1.07568)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fe1ek"]
 
@@ -15,7 +20,7 @@ script = ExtResource("1_eclxj")
 transform = Transform3D(1.33811, 0, 0, 0, 1, 0, 0, 0, -1.36539, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1.67932, 0, 0, 0, 1.34308, 0.0560826, 0.298048, -0.120206)
+transform = Transform3D(1.18499, 0, 0, 0, 1.79419, 0, 0, 0, 1.91312, 0, 0.470371, -0.0960663)
 shape = SubResource("BoxShape3D_tlbmd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -23,12 +28,23 @@ transform = Transform3D(0.57596, 0, 0, 0, 0.625443, 0, 0, 0, 0.766916, 0.0796819
 shape = SubResource("BoxShape3D_fe1ek")
 
 [node name="White Mug" parent="." instance=ExtResource("2_fe1ek")]
-transform = Transform3D(0.114772, 0, 0, 0, 0.114772, 0, 0, 0, 0.114772, 0.109751, -0.23185, -0.0759755)
+transform = Transform3D(0.114772, 0, 0, 0, 0.114772, 0, 0, 0, 0.114772, 0, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(0.5, -0.000260025, 0.00049203, 0.000258877, 0.499999, 0.00116562, -0.000492636, -0.00116537, 0.499998, 0, 0, 0)
-light_color = Color(0.898992, 0.536851, 0.394731, 1)
-light_energy = 2.0
+transform = Transform3D(0.5, -0.000260024, 0.000492031, 0.000258877, 0.499999, 0.00116562, -0.000492636, -0.00116537, 0.499998, 0.0599763, 1.35034, 0.0578514)
+light_energy = 8.0
 omni_range = 6.189
+
+[node name="Green Mug" parent="." instance=ExtResource("3_5yp7a")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 0, 0, 0)
+
+[node name="Purple Mug" parent="." instance=ExtResource("4_46xm4")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 0, 0, 0)
+
+[node name="Red Mug" parent="." instance=ExtResource("5_op6nc")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 0, 0, 0)
+
+[node name="Blue Mug" parent="." instance=ExtResource("6_8xhtm")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 0, 0, 0)
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
