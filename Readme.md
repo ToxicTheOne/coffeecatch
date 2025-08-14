@@ -4,7 +4,7 @@ An endless runner game made in 3 days for the Solo Game Jam 2025 Hosted by Rapha
 I used a lot of open source assets so its only fair that i give back someway and make the entire project open source,
 Although im not a good programmer still so i doubt this will be of use for anyone.
 
-# Credits; 
+# Credits
 
 **Music**: 
 Jeremy Blake - Power Up!
