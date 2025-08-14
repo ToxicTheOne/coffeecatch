@@ -1,0 +1,108 @@
+[gd_scene load_steps=4 format=3 uid="uid://we8bqo540b74"]
+
+[ext_resource type="Script" uid="uid://cpwde717rpspp" path="res://scripts/deathscreen.gd" id="1_uurjc"]
+[ext_resource type="FontFile" uid="uid://c6eaablg8a0gc" path="res://Resources/font.ttf" id="1_ylnw1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uurjc"]
+size = Vector2(621.5, 224)
+
+[node name="deathscreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uurjc")
+
+[node name="BackToMenuButton" type="Button" parent="."]
+z_index = 50
+custom_minimum_size = Vector2(350, 0)
+offset_left = 35.0
+offset_top = 499.0
+offset_right = 609.0
+offset_bottom = 647.0
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_ylnw1")
+theme_override_font_sizes/font_size = 70
+text = "Back to Main Menu"
+
+[node name="Dead!" type="Label" parent="."]
+offset_left = 218.0
+offset_top = 33.0
+offset_right = 1312.0
+offset_bottom = 428.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.905882)
+theme_override_constants/shadow_offset_x = -10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 15
+theme_override_fonts/font = ExtResource("1_ylnw1")
+theme_override_font_sizes/font_size = 100
+text = "Dead! :("
+horizontal_alignment = 1
+
+[node name="score" type="Label" parent="."]
+offset_left = -336.0
+offset_top = 193.0
+offset_right = 758.0
+offset_bottom = 588.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = -10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 15
+theme_override_constants/shadow_outline_size = 15
+theme_override_fonts/font = ExtResource("1_ylnw1")
+theme_override_font_sizes/font_size = 80
+text = "Score:
+"
+horizontal_alignment = 1
+
+[node name="time" type="Label" parent="."]
+offset_left = -443.0
+offset_top = 288.0
+offset_right = 651.0
+offset_bottom = 683.0
+scale = Vector2(0.96406, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = -10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 15
+theme_override_constants/shadow_outline_size = 15
+theme_override_fonts/font = ExtResource("1_ylnw1")
+theme_override_font_sizes/font_size = 80
+text = "Time:"
+horizontal_alignment = 1
+
+[node name="coffee_drank" type="Label" parent="."]
+offset_left = -239.0
+offset_top = 388.0
+offset_right = 855.0
+offset_bottom = 783.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = -10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 15
+theme_override_constants/shadow_outline_size = 15
+theme_override_fonts/font = ExtResource("1_ylnw1")
+theme_override_font_sizes/font_size = 80
+text = "Coffees Drank:"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_right = 1885.0
+offset_bottom = 1029.0
+mouse_filter = 2
+color = Color(0.017145, 0.167879, 0.320991, 1)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(332.25, 595)
+shape = SubResource("RectangleShape2D_uurjc")
+
+[connection signal="pressed" from="BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

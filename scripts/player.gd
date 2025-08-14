@@ -18,6 +18,11 @@ var jump_velocity = 6
 var walking_speed = 10.0
 var crouching_speed = 3
 var mouse_sens = 0.4
+@onready var jumpsound = $jump
+@onready var powerup: AudioStreamPlayer3D = $powerup
+
+
+
 
 # FOV
 const BASE_FOV = 75.0
@@ -30,6 +35,8 @@ var dashes := 3
 @onready var dashbar1 := $dashbar1
 @onready var dashbar2 := $dashbar2
 @onready var dashbar3 := $dashbar3
+@onready var dashsound := $dash
+
 
 # Slam
 @onready var slam_velocity = jump_velocity * 2.5
@@ -53,15 +60,20 @@ func _process(delta):
 		dashes = 0
 	Autoload.player_velocity = velocity
 	handle_dash_rects()
-
-
-
+	if Autoload.kill_player == true:
+		dashbar1.visible = false
+		dashbar2.visible = false
+		dashbar3.visible = false
+	slam_velocity = jump_velocity * 2.5
 
 func _ready():
 	Autoload.player_touched.connect(apply_buff)
 
 
+
+
 func apply_buff():
+	powerup.play()
 	var random_chance = randi_range(0,1)
 	if random_chance == 1:
 		current_speed += 1
@@ -100,6 +112,9 @@ func _physics_process(delta: float) -> void:
 		velocity.y = jump_velocity
 		if jump_buff == true:
 			velocity.y = jump_velocity * 1.8
+		
+		jumpsound.pitch_scale = randi_range(1.0,1.4)
+		jumpsound.play()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -132,6 +147,9 @@ func _physics_process(delta: float) -> void:
 			velocity = cam_direction * dash_velocity * 1.2
 			velocity.y += 8
 		
+		dashsound.pitch_scale = randi_range(2.0,2.3)
+		dashsound.play()
+		
 		dashes -= 1
 		
 		await get_tree().create_timer(3).timeout
@@ -142,7 +160,8 @@ func _physics_process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("slam"):
 		velocity.y -= slam_velocity
-	
+		jumpsound.pitch_scale = 0.50
+		jumpsound.play()
 	
 	
 	

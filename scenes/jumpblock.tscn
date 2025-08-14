@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c01e76rm6xkbg"]
+[gd_scene load_steps=7 format=3 uid="uid://c01e76rm6xkbg"]
 
 [ext_resource type="Script" uid="uid://byaff3nh6ewdo" path="res://scripts/block.gd" id="1_a231x"]
 [ext_resource type="Texture2D" uid="uid://fk1pn37ieink" path="res://Resources/pixelarttextures/Rock 3.png" id="2_rsfjt"]
+[ext_resource type="AudioStream" uid="uid://b3guc2lfkyqfp" path="res://sounds/Concrete scrape loop.mp3" id="3_rsfjt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4sh6y"]
 
@@ -15,19 +16,28 @@ material = SubResource("StandardMaterial3D_1ubia")
 
 [node name="jumpblock" type="StaticBody3D" groups=["obstacles"]]
 script = ExtResource("1_a231x")
-normal_speed = -1.4
+normal_speed = -1.0
 small_immunity = true
 randomize_velocity = false
 metadata/_custom_type_script = "uid://byaff3nh6ewdo"
 
 [node name="Collision3" type="CollisionShape3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 6.07863, -0.17531, -11.8023)
+transform = Transform3D(3.48512, 0, 0, 0, 10, 0, 0, 0, 10, 2.45917, -0.17531, -11.8023)
 shape = SubResource("BoxShape3D_4sh6y")
 
 [node name="Collision4" type="CollisionShape3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 6.07863, -0.17531, -1.60336)
+transform = Transform3D(3.48512, 0, 0, 0, 10, 0, 0, 0, 10, 2.45917, -0.17531, -1.60336)
 shape = SubResource("BoxShape3D_4sh6y")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.34222, 0, 0, 0, 8.84267, 0, 0, 0, 20.9615, 2.64308, 0.431276, -6.87484)
 mesh = SubResource("BoxMesh_p0bhr")
+
+[node name="slidesound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26951, -3.23029, -6.87994)
+stream = ExtResource("3_rsfjt")
+pitch_scale = 0.85
+autoplay = true
+max_distance = 30.0
+bus = &"SFX"
+parameters/looping = true

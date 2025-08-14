@@ -48,16 +48,22 @@ func randomize_scale():
 	collision = get_child(0)
 	mesh = get_child(1)
 	if small_buff == false:
-		collision.scale = Vector3(randf_range(2,6),randf_range(2,8),randf_range(2,9))
+		collision.scale = Vector3(randf_range(3,6),randf_range(2,10),randf_range(2,9))
 	
 	elif small_buff == true:
 		collision.scale = Vector3(2,2,2)
+	
+	elif small_buff == false and Autoload.get_harder == true:
+		collision.scale = Vector3(randf_range(4,13),randf_range(4,15),randf_range(4,13))
 	
 	mesh.scale = collision.scale
 	
 	if randomize_velocity == true:
 		normal_speed = randf_range(-1.1, -1.8)
 		speed = normal_speed
+
+	
+	
 	
 	await get_tree().create_timer(0.2).timeout
 	visible = true
@@ -77,6 +83,7 @@ func _process(delta: float):
 	elif invincible_buff == true:
 		position.x += 0
 		position.y -= 0.2
+		
 
 
 
@@ -87,8 +94,6 @@ func _process(delta: float):
 
 func _ready():
 	Autoload.player_touched.connect(apply_debuff)
-	await get_tree().create_timer(20).timeout
-	queue_free()
 	
 	
 	

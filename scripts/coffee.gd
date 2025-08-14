@@ -10,6 +10,8 @@ extends RigidBody3D
 @onready var blue_mug := $"Blue Mug"
 @onready var mugs : Array = [white_mug, green_mug, purple_mug, red_mug, blue_mug]
 
+
+
 func initialize_coffee():
 	randomize_type()
 	skew_position()
@@ -38,6 +40,11 @@ func randomize_type():
 func skew_position():
 	position.x += randi_range(-10, -40)
 	position.z += randi_range(-5, 10)
+	if Autoload.skew_harder == false:
+		position.y += randi_range(0, 2)
+	else:
+		position.y += randi_range(0, 6)
+
 
 func _physics_process(delta: float) -> void:
 	position.x += coffee_speed
@@ -48,9 +55,5 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		Autoload.score += 20
 		Autoload.coffee_type = coffee_type
 		Autoload.player_touched.emit()
+		Autoload.coffee_taken += 1
 		queue_free()
-
-
-func _ready():
-	await get_tree().create_timer(20).timeout
-	queue_free()

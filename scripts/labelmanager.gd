@@ -14,7 +14,11 @@ func _ready():
 func _process(delta):
 	update_label()
 	Autoload.time_passed = secondslabel.text
-
+	
+	if Autoload.kill_player == true:
+		hide()
+	
+	
 
 func update_label():
 	self.text = str(" Score: ", Autoload.score)
@@ -26,13 +30,14 @@ func update_label():
 
 
 func calculate_time():
-	seconds += 1
-	Autoload.score += 2
-	sixty_seconds_count += 1
-	if sixty_seconds_count == 60:
-		minutes += 1
-		sixty_seconds_count = 0
-		seconds = 0
+	if Autoload.kill_player == false:
+		seconds += 1
+		Autoload.score += 2
+		sixty_seconds_count += 1
+		if sixty_seconds_count == 60:
+			minutes += 1
+			sixty_seconds_count = 0
+			seconds = 0
 
 
 func update_announcer():
@@ -65,7 +70,7 @@ func update_announcer():
 	announcer.text = main_phrase
 
 	
-	tween.tween_property(announcer, "scale", Vector2(1, 1), 0.6 ).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.tween_property(announcer, "scale", Vector2(1, 1), 0.2 ).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	
 	await get_tree().create_timer(3).timeout
 

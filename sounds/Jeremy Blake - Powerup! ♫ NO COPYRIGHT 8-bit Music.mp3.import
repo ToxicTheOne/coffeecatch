@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bm0q1fx5cb80g"
+path="res://.godot/imported/Jeremy Blake - Powerup! ♫ NO COPYRIGHT 8-bit Music.mp3-8693770871927a5f218383b16581a10f.mp3str"
+
+[deps]
+
+source_file="res://sounds/Jeremy Blake - Powerup! ♫ NO COPYRIGHT 8-bit Music.mp3"
+dest_files=["res://.godot/imported/Jeremy Blake - Powerup! ♫ NO COPYRIGHT 8-bit Music.mp3-8693770871927a5f218383b16581a10f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

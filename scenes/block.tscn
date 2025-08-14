@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://kum2yem6oml8"]
+[gd_scene load_steps=7 format=3 uid="uid://kum2yem6oml8"]
 
 [ext_resource type="Script" uid="uid://byaff3nh6ewdo" path="res://scripts/block.gd" id="1_8r6n6"]
 [ext_resource type="Texture2D" uid="uid://cruv3yoo1kapa" path="res://Resources/pixelarttextures/Rock 2.png" id="2_cgrg5"]
+[ext_resource type="AudioStream" uid="uid://b3guc2lfkyqfp" path="res://sounds/Concrete scrape loop.mp3" id="3_4kun4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3gtdk"]
 
@@ -22,3 +23,13 @@ shape = SubResource("BoxShape3D_3gtdk")
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.78524, 0, 0, 0, 5.76696, 0, 0, 0, 4.45892, 0, 0, 0)
 mesh = SubResource("BoxMesh_8r6n6")
+
+[node name="slidesound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.23029, 0)
+stream = ExtResource("3_4kun4")
+volume_db = -5.0
+pitch_scale = 0.64
+autoplay = true
+max_distance = 20.0
+bus = &"SFX"
+parameters/looping = true

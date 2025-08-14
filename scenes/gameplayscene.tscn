@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cons778vrglqa"]
+[gd_scene load_steps=30 format=3 uid="uid://cons778vrglqa"]
 
 [ext_resource type="Script" uid="uid://c742y6k548eej" path="res://scripts/gameplayscene.gd" id="1_e2elo"]
 [ext_resource type="Script" uid="uid://cvbtqc3mi6nk2" path="res://scripts/static_body_3d.gd" id="1_hj1ab"]
@@ -11,9 +11,11 @@
 [ext_resource type="Script" uid="uid://0p8k3mmxqkx" path="res://scripts/killzone.gd" id="6_53431"]
 [ext_resource type="FontFile" uid="uid://c6eaablg8a0gc" path="res://Resources/font.ttf" id="7_n0c6x"]
 [ext_resource type="Shader" uid="uid://cnych07wnucrv" path="res://shaders/pixelretro.gdshader" id="7_wjviv"]
-[ext_resource type="Script" uid="uid://ds8shmksraybf" path="res://retropixeleffect.gd" id="8_4srvn"]
+[ext_resource type="Script" uid="uid://ds8shmksraybf" path="res://scripts/retropixeleffect.gd" id="8_4srvn"]
 [ext_resource type="Script" uid="uid://d3660jnio0pgm" path="res://scripts/labelmanager.gd" id="10_4rw3y"]
 [ext_resource type="PackedScene" uid="uid://rw7gdui8lu3n" path="res://addons/EasyMenus/Scenes/pause_menu.tscn" id="14_8l8kk"]
+[ext_resource type="PackedScene" uid="uid://we8bqo540b74" path="res://scenes/deathscreen.tscn" id="15_8l8kk"]
+[ext_resource type="AudioStream" uid="uid://bm0q1fx5cb80g" path="res://sounds/Jeremy Blake - Powerup! ♫ NO COPYRIGHT 8-bit Music.mp3" id="16_kfug5"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_22asa"]
 panorama = ExtResource("5_2ejc5")
@@ -32,7 +34,7 @@ shader = ExtResource("3_r2c4n")
 shader_parameter/custom_texture = ExtResource("4_r2c4n")
 shader_parameter/use_custom_texture = true
 shader_parameter/texture_offset = Vector2(0, 0)
-shader_parameter/texture_scale = Vector2(50, 5.375)
+shader_parameter/texture_scale = Vector2(-146.045, 5.375)
 shader_parameter/texture_rotation = 0.0
 shader_parameter/color_steps = 6.0
 shader_parameter/dither_strength = -0.07
@@ -46,7 +48,7 @@ material = SubResource("ShaderMaterial_4srvn")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_53431"]
 albedo_color = Color(0.789172, 0.789172, 0.789172, 1)
 albedo_texture = ExtResource("5_brmny")
-uv1_scale = Vector3(-32.06, 9.71, -2.155)
+uv1_scale = Vector3(-313.735, 6.745, -2.155)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4rw3y"]
 material = SubResource("StandardMaterial3D_53431")
@@ -88,12 +90,16 @@ shadow_enabled = true
 environment = SubResource("Environment_hj1ab")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(995.575, -0.0104378, -0.0495369, 2.35887, 4.41637, 0.200896, 1.19879, -0.021788, 40.745, 259.336, -2.05438, 0)
+transform = Transform3D(4419.27, -0.010353, -0.0493298, 10.4708, 4.38048, 0.200056, 5.32132, -0.0216109, 40.5746, 1690.64, -2.05438, 0)
 script = ExtResource("1_hj1ab")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_op2k8")
 skeleton = NodePath("../..")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 1.16351e-13, 3.63798e-12, 2.53785e-07, 1, 0, 7.45058e-08, -3.49246e-10, 1, -0.00137207, 18.4445, -0.0856255)
+shape = SubResource("BoxShape3D_yuxya")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_yuxya")
@@ -113,7 +119,7 @@ shape = SubResource("BoxShape3D_brmny")
 transform = Transform3D(0.00263464, 6.06437e-06, 3.08187e-06, -0.00054883, 0.225595, -0.00111296, -3.06567e-05, 0.00012078, 0.0244961, -0.019379, 7.25356, -0.694179)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/borderleft"]
-transform = Transform3D(380.354, 5.32907e-15, 0, -1.42109e-14, 105.854, 0, 0, 6.20385e-25, 14.3196, 6.2919, 0, 0)
+transform = Transform3D(380.354, 3.23712e-09, 0, -8.75225e-08, 105.854, -1.45519e-11, 0, 1.16415e-10, 14.3196, 6.29169, -3.8147e-06, 0.269674)
 mesh = SubResource("BoxMesh_4rw3y")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/borderleft"]
@@ -138,23 +144,43 @@ transform = Transform3D(1.74011, 1.0877e-10, 3.63798e-10, 4.59724e-07, 4.81949, 
 shape = SubResource("BoxShape3D_53431")
 debug_color = Color(0.960784, 0, 0, 0.419608)
 
+[node name="obstaclespawner" parent="StaticBody3D" instance=ExtResource("2_w8585")]
+transform = Transform3D(0.00022628, 5.36142e-07, 2.72463e-07, -0.000539517, 0.228279, -0.0011262, -2.99638e-05, 0.000121516, 0.0246453, 0.164394, -0.390874, 0.372417)
+
+[node name="obstaclespawner2" parent="StaticBody3D" instance=ExtResource("2_w8585")]
+transform = Transform3D(0.00022628, 5.36142e-07, 2.72463e-07, -0.000539517, 0.228279, -0.0011262, -2.99638e-05, 0.000121516, 0.0246453, 0.164391, -0.440281, 0.188713)
+
+[node name="obstaclespawner3" parent="StaticBody3D" instance=ExtResource("2_w8585")]
+transform = Transform3D(0.00022628, 5.36142e-07, 2.72463e-07, -0.000539517, 0.228279, -0.0011262, -2.99638e-05, 0.000121516, 0.0246453, 0.164389, -0.42927, -0.0522538)
+
+[node name="obstaclespawner4" parent="StaticBody3D" instance=ExtResource("2_w8585")]
+transform = Transform3D(0.00022628, 5.36142e-07, 2.72463e-07, -0.000539517, 0.228279, -0.0011262, -2.99638e-05, 0.000121516, 0.0246453, 0.164438, -0.41868, -0.286703)
+
+[node name="obstaclespawner5" parent="StaticBody3D" instance=ExtResource("2_w8585")]
+transform = Transform3D(0.00022628, 5.36142e-07, 2.72463e-07, -0.000539517, 0.228279, -0.0011262, -2.99638e-05, 0.000121516, 0.0246453, 0.164383, -0.407235, -0.53446)
+
+[node name="obstaclespawner6" parent="StaticBody3D" instance=ExtResource("2_w8585")]
+transform = Transform3D(0.00022628, 5.36142e-07, 2.72463e-07, -0.000539517, 0.228279, -0.0011262, -2.99638e-05, 0.000121516, 0.0246453, -0.225607, 0.538999, 0.424061)
+first_spawner = true
+
+[node name="obstaclespawner7" parent="StaticBody3D" instance=ExtResource("2_w8585")]
+transform = Transform3D(0.00022628, 5.36142e-07, 2.72463e-07, -0.000539517, 0.228279, -0.0011262, -2.99638e-05, 0.000121516, 0.0246453, -0.225609, 0.489592, 0.240356)
+first_spawner = true
+
+[node name="obstaclespawner8" parent="StaticBody3D" instance=ExtResource("2_w8585")]
+transform = Transform3D(0.00022628, 5.36142e-07, 2.72463e-07, -0.000539517, 0.228279, -0.0011262, -2.99638e-05, 0.000121516, 0.0246453, -0.225612, 0.500603, -0.000610422)
+first_spawner = true
+
+[node name="obstaclespawner9" parent="StaticBody3D" instance=ExtResource("2_w8585")]
+transform = Transform3D(0.00022628, 5.36142e-07, 2.72463e-07, -0.000539517, 0.228279, -0.0011262, -2.99638e-05, 0.000121516, 0.0246453, -0.225562, 0.511193, -0.235059)
+first_spawner = true
+
+[node name="obstaclespawner10" parent="StaticBody3D" instance=ExtResource("2_w8585")]
+transform = Transform3D(0.00022628, 5.36142e-07, 2.72463e-07, -0.000539517, 0.228279, -0.0011262, -2.99638e-05, 0.000121516, 0.0246453, -0.225617, 0.522638, -0.482817)
+first_spawner = true
+
 [node name="Player" parent="." instance=ExtResource("1_yuxya")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -136.897, 1.123, 0.740004)
-
-[node name="obstaclespawner" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 747.528, 1.31838, 18.0864)
-
-[node name="obstaclespawner2" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 747.528, 1.06518, 10.6337)
-
-[node name="obstaclespawner3" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 747.528, 1.06518, 0.856322)
-
-[node name="obstaclespawner4" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 747.756, 1.06518, -8.65632)
-
-[node name="obstaclespawner5" parent="." instance=ExtResource("2_w8585")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 747.528, 1.06518, -18.7095)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -457.908, -3.06711, 0.740004)
 
 [node name="scorelabel" type="RichTextLabel" parent="."]
 offset_left = -4.0
@@ -209,6 +235,17 @@ mouse_filter = 2
 script = ExtResource("8_4srvn")
 
 [node name="PauseMenu" parent="." instance=ExtResource("14_8l8kk")]
+
+[node name="deathscreen" parent="." instance=ExtResource("15_8l8kk")]
+visible = false
+z_index = 100
+
+[node name="song" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_kfug5")
+volume_db = -10.0
+autoplay = true
+bus = &"music"
+parameters/looping = true
 
 [connection signal="body_entered" from="StaticBody3D/killzone" to="StaticBody3D/killzone" method="_on_body_entered"]
 [connection signal="body_exited" from="StaticBody3D/killzone" to="StaticBody3D/killzone" method="_on_body_exited"]

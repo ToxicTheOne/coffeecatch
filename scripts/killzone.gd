@@ -11,6 +11,5 @@ func _on_body_exited(body: Node3D) -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
-		#if body.is_in_group("player"):
-			#get_tree().change_scene_to_file()
-	pass
+		if body.is_in_group("player"):
+			Autoload.kill_player = true

@@ -3,8 +3,6 @@ extends StaticBody3D
 
 var speed = 0.01
 var speed_gain_chance
-@onready var left_border = $borderleft
-@onready var right_border = $borderright
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,3 +17,6 @@ func _process(delta: float) -> void:
 		speed += 0.01
 		speed_gain_chance = randi_range(1,1000)
 		print ("speed gained!", speed)
+	
+	
+	

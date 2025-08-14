@@ -12,7 +12,7 @@ size = Vector3(1, 1, 1.07568)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fe1ek"]
 
-[node name="coffee" type="RigidBody3D"]
+[node name="coffee" type="RigidBody3D" groups=["obstacles"]]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_eclxj")
 

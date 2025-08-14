@@ -7,20 +7,18 @@ extends Node3D
 @onready var timer = $coffeetimer
 @onready var speed : int = 0.07
 var can_spawn_obstacles = true
-
+@export var first_spawner := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	timer.wait_time = randi_range(1,10)
 	timer.start()
-	await get_tree().create_timer(10).timeout
-	speed = 0.1
-	await get_tree().create_timer(20).timeout
-	speed = 0.2
-	await get_tree().create_timer(10).timeout
-	speed = 0.26
+	await get_tree().create_timer(5).timeout
+	speed = -0.1
 	await get_tree().create_timer(30).timeout
-	speed = 0.3
+	speed = -0.2
+	
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -33,7 +31,10 @@ func _process(delta: float) -> void:
 		if chance_spawn2 == 1:
 			spawn_obstacle3()
 	
-	position.x += speed
+	position.x -= speed
+	if first_spawner == true and Autoload.kill_first_spawners == true:
+		queue_free()
+
 
 func spawn_coffee():
 	var new_coffee = coffee_object.instantiate()

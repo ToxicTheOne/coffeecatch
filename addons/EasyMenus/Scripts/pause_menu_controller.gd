@@ -5,7 +5,14 @@ signal resume
 @onready var content : VBoxContainer = $%Content
 @onready var options_menu : Control = $%OptionsMenu
 @onready var resume_game_button: Button = $%ResumeGameButton
-	
+
+
+func _process(delta: float) -> void:
+	if Autoload.kill_player == true:
+		hide()
+		emit_signal("resume")
+
+
 func open_pause_menu():
 	#Stops game and shows pause menu
 	get_tree().paused = true

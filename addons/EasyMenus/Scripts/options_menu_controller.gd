@@ -1,6 +1,6 @@
 extends Control
 signal  close
-
+signal open
 const HSliderWLabel = preload("res://addons/EasyMenus/Scripts/slider_w_labels.gd")
 
 @onready var sfx_volume_slider : HSliderWLabel = $%SFXVolumeSlider
@@ -8,8 +8,8 @@ const HSliderWLabel = preload("res://addons/EasyMenus/Scripts/slider_w_labels.gd
 @onready var fullscreen_check_button: CheckButton = $%FullscreenCheckButton
 @onready var vsync_check_button: CheckButton = $%VSyncCheckButton
 
-var sfx_bus_index
-var music_bus_index
+var sfx_bus_index = "SFX"
+var music_bus_index = "music"
 var config = ConfigFile.new()
 
 
@@ -20,6 +20,7 @@ func go_back():
 
 # Called from outside initializes the options menu
 func on_open():
+	emit_signal("open")
 	sfx_volume_slider.hslider.grab_focus()
 	
 	sfx_bus_index = AudioServer.get_bus_index(OptionsConstants.sfx_bus_name)
@@ -37,6 +38,7 @@ func _on_music_volume_slider_value_changed(value):
 func set_volume(bus_index, value):
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 	
+
 # Saves the options when the options menu is closed
 func save_options():
 	config.set_value(OptionsConstants.section_name,OptionsConstants.sfx_volume_key_name, sfx_volume_slider.hslider.value)
