@@ -16,7 +16,8 @@ n64 Texture Pack B by n64dude on Itch.io : https://n64dude.itch.io/n64-texture-p
 **Other**:
 Easy Menus by savovuk on Godot Asset Library and Github : https://godotengine.org/asset-library/asset/1541, https://github.com/SavoVuksan/EasyMenus
 
-​# How to play
+
+# How to play
 
 ​Run away from the approaching black void and dont be pushed by the blocks.
 
